@@ -7,7 +7,7 @@ User dashboard.The code is modularized according to the angular MVC structure.
 
 Back End:
 Coded in Python, Flask framework is used as the back end server. The Server responds to the http calls from the front end by sending back JSON data.
-The app is built to function as a RESTFul API.
+The app is built to function as a RESTFul API.The web app is capable of all the CRUD operations.
 
 Database:
 The back end(Flask) server communicates with the MySql database using a Flask-SqlAlchemy extension. 
