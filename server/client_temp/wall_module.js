@@ -1,0 +1,1 @@
+var wallPage = angular.module('wallPage',['ngRoute']);

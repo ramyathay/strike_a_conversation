@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app = 'wallPage'>
+<head>
+	<!-- <link rel="stylesheet" href="/../../client/static/css/styles.css" type="text/css"> -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"/></script>
+	<script type="text/javascript" src = "../client_temp/wall_module.js"></script>
+
+	<script type="text/javascript" src = "../client_temp/controllers/userController.js"></script>
+	<script type="text/javascript" src = "../client_temp/controllers/postController.js"></script>
+	<script type="text/javascript" src = "../client_temp/controllers/commentController.js"></script>
+	<script>
+		//Use routeProvider here if any partials have to be included
+		wallPage.config(function ($routeProvider){
+			$routeProvider
+			.when('/logoff', {
+				templateUrl: '../index.html'
+			})	
+			.otherwise({
+				redirectTo: '/wallPage'
+			});
+		});
+		
+	</script>
+</head>
+<body>
+	<div class="container">
+		<div class="header">
+			<ul class="nav nav-tabs"> 
+				<li role = "presentation">CodingDojo Wall</li>
+				<li role = "presentation" ng-model = 'current_user'>Welcome {{current_user}}</li>
+				<li role = "presentation"><a href="/logoff">log off</a></li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

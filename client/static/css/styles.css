@@ -1,0 +1,23 @@
+#alert_message {
+	width: 40%
+}
+.textbox {
+	padding-left: 25px;
+}
+.header {
+	border-bottom: 2px solid black
+}
+.align_btn{
+	display: inline-block;
+	padding-left: 40px;
+}
+.align_text {
+	display: inline-block;
+}
+.comment_box {
+	display: inline-block;
+}
+.align_postData{
+	display: inline-block;
+	float: right
+}
