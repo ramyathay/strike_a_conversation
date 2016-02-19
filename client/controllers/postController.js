@@ -1,10 +1,14 @@
-var wallPage = angular.module('wallPage');
-wallPage.controller('postsController',function($scope,postFactory){
-	$scope.get_all_posts_comments = function(data){
-		console.log("Entered get_all_posts_comments")
+//var wallPage = angular.module('wallPage')
+var login_register = angular.module('login_register')
+console.log("Entered posts controller")
+
+login_register.controller('postsController',function($scope,postFactory){
+	console.log("Entered get_all_posts_comments")
+	$scope.get_all_posts_comments = function(){
 		postFactory.get_all_posts_comments(function(data){
+			console.log("data received fro all post comments are",data)
 			$scope.posts_comments = data
-			$scope.current_user = 'Ramyatha yugendernath'
+			// $scope.current_user = 'Ramyatha yugendernath'
 			$scope.show_editComment = false
 			$scope.show_editPost = false
 			$scope.show_comment = true
@@ -19,7 +23,7 @@ wallPage.controller('postsController',function($scope,postFactory){
 	$scope.submitComment = function(comment_form, post_id) {
 		console.log("Comment form data ",comment_form, post_id)
 		postFactory.submitComment(comment_form,post_id,function(data){
-		console.log("REceived comment id ",data)
+			console.log("REceived comment id ",data)
 		});
 		$scope.get_all_posts_comments();
 	}

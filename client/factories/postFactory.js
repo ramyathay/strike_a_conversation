@@ -1,6 +1,7 @@
-var wallPage = angular.module('wallPage')
+//var wallPage = angular.module('wallPage')
+var login_register = angular.module('login_register')
 
-wallPage.factory('postFactory',function($http){
+login_register.factory('postFactory',function($http){
 	var factory = {}
 
 	factory.get_all_posts_comments = function(callback){

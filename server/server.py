@@ -97,6 +97,7 @@ def get_all_users_posts():
 		all_user_posts.append(all_posts)
 
 	print("All posts are" ,all_user_posts)
+	resp = make_response()
 	return jsonify(result = all_user_posts)
 
 #@app.route('/users/<user_id>/posts/<post_id>/comments',methods = ["POST"])
@@ -152,13 +153,14 @@ def register():
 		pw_hash=bcrypt.generate_password_hash(request.json['password'])
 		user = Users(first_name = request.json['first_name'],last_name = request.json['last_name'],email = request.json['email'],password = pw_hash,created_at = current_time,updated_at = current_time)
 		print("user is",user.__dict__)
-		session['current_user'] = request.json['first_name']
+		session['current_user'] = request.json['first_name'] + request.json['last_name']
 		sql_alchemy_session.add(user)
 		#Flush() to add the current transaction to the db and get the auto generated user_idfo rthis transaction
 		sql_alchemy_session.flush()
 		user_id = user.__dict__.get('user_id')
 		#commit() commits any pending changes to the db
 		sql_alchemy_session.commit()
+
 		return jsonify(error = False,username = session['current_user'],user_id = user_id)
 
 @app.route('/login',methods = ["POST"])
@@ -169,7 +171,7 @@ def login():
 	}
 	login_status = login_user(login_info)
 	if login_status['loginflag'] == False:
-		session['current_user'] = login_status['user']['first_name']
+		session['current_user'] = login_status['user']['first_name'] + " " +login_status['user']['last_name']
 		return jsonify(errors = False, username = session['current_user'],user_id = login_status['user']['user_id'])
 	else:
 		for message in login_status['errors']:
