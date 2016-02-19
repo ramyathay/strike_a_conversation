@@ -33,6 +33,8 @@
 		<div ng-repeat = "post in posts_comments">
 			<h4 >{{post.first_name}}   {{post.last_name}} -  {{post.post_created_at}}</h4>
 			<div ng-if = "post.posted_by == current_user" class="align_postData">
+				<button class="btn btn-primary " ng-click = "updatePost()">Edit Post</button>
+				<textarea name="edit_post" id="edit_post" rows="1" cols="55" ng-model = "user.editPost" ng-show = "show_editPost"></textarea>
 				<button class="btn btn-danger " ng-click = "deletePost()">Delete Post</button>
 			</div>
 			<p class="align_text"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{post.post_text}}<p>
@@ -40,7 +42,12 @@
 				<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{comment.commented_by}} - {{comment.comment_created_at}}</h5>
 				<p class="align_text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{comment.comment_text}}</p>
 				<div ng-if = "comment.commented_by == current_user" class="align_btn">
-					<button class="btn btn-sm btn-danger  align_btn" ng-click = "deleteComment()">Delete Comment</button>
+					<button class="btn btn-primary " ng-click = "show_editComment = true;show_comment = false" ng-show = "show_comment">Edit Comment</button>
+					<button class="btn btn-sm btn-danger  align_btn" ng-click = "deleteComment()" ng-show = "show_comment">Delete Comment</button>
+
+					<textarea name="edit_comment" id="edit_comment" rows="1" cols="55" ng-model = "userComment.editComment" ng-show = "show_editComment"></textarea>
+					<button class="btn btn-primary btn-sm" ng-click = "updateComment(post.post_id,comment.comment_id,userComment)" ng-show = "show_editComment">Save</button>
+					<button class="btn btn-primary btn-sm" ng-show = "show_editComment"><a href="/home" style="color:white">Cancel</a></button>
 				</div>
 			</div>
 			<form>

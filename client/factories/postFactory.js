@@ -3,6 +3,12 @@ var wallPage = angular.module('wallPage')
 wallPage.factory('postFactory',function($http){
 	var factory = {}
 
+	factory.get_all_posts_comments = function(callback){
+		$http.get('http://localhost:5000/users/posts/comments').success(function(output){
+			console.log("Allposts with comments are", output.result)
+			callback(output.result)
+		});
+	}
 	factory.getCurrentUser = function(callback){
 		$http.get('http://localhost:5000/users').success(function(output) {
 			user = output;
@@ -25,10 +31,11 @@ wallPage.factory('postFactory',function($http){
 			callback(output)
 		});
 	}
-	factory.get_all_posts_comments = function(callback){
-		$http.get('http://localhost:5000/users/posts/comments').success(function(output){
-			console.log("Allposts with comments are", output.result)
-			callback(output.result)
+	factory.updateComment = function(edit_comment,post_id,comment_id,callback){
+		console.log("data,postid,commentid",edit_comment,post_id,comment_id)
+		$http.put('http://localhost:5000/users/posts/'+ post_id + '/comments/' + comment_id ,edit_comment).success(function (output) {
+			console.log("UPdate output is",output)
+			callback(output)
 		});
 	}
 	return factory

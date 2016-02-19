@@ -82,7 +82,7 @@ def get_all_users_posts():
 			if post_data.post_id == comment_data.post_id :
 				for user_data in comments_and_users:   #Is there a need for third loop to get comment user info?
 					if user_data.comment_id == comment_data.comment_id:	
-						all_comments.append({'comment_text': comment_data.comment_text,'comment_created_at': comment_data.created_at,'commented_by': user_data.first_name + " " + user_data.last_name,'user_id': user_data.user_id})
+						all_comments.append({'comment_text': comment_data.comment_text,'comment_created_at': comment_data.created_at,'commented_by': user_data.first_name + " " + user_data.last_name,'comment_id':comment_data.comment_id,'user_id': user_data.user_id})
 		all_posts = {
 			'first_name': post_data.first_name,
 			'last_name': post_data.last_name,
@@ -125,13 +125,13 @@ def delete_comment(post_id,comment_id):
 
 @app.route('/users/posts/<id>',methods = ["PUT"])
 def update_post(id):
-	sql_alchemy_session.query(Posts).filter(Posts.post_id == id).update({"post_text": (request.json['post_text'])})
+	sql_alchemy_session.query(Posts).filter(Posts.post_id == id).update({"post_text": (request.json['editPost'])})
 	sql_alchemy_session.commit()
 	return jsonify(result = "Post Updated Successfully")
 
 @app.route('/users/posts/<post_id>/comments/<comment_id>',methods = ["PUT"])
 def update_comment(post_id,comment_id):
-	sql_alchemy_session.query(Comments).filter(Comments.comment_id == comment_id).update({"comment_text": (request.json['comment_text'])})
+	sql_alchemy_session.query(Comments).filter(Comments.comment_id == comment_id).update({"comment_text": (request.json['editComment'])})
 	sql_alchemy_session.commit()
 	return jsonify(result = "Comment Updated Successfully")
 
